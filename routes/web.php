@@ -21,8 +21,6 @@ Route::get('/dashboard', [PostController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
-
 // 🔹 Profile Routes (Protected)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -47,6 +45,11 @@ Route::middleware('auth')->group(function () {
 
 // 🔹 Show Single Post
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+
+// 🔹 Redirect to Login Page
+Route::get('/go-to-login', function () {
+    return redirect()->route('login');
+});
 
 // 🔹 Auth Scaffolding
 require __DIR__.'/auth.php';
